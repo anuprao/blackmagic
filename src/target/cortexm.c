@@ -457,6 +457,12 @@ bool cortexm_probe(ADIv5_AP_t *ap)
 			LPC43xx detection. */
 			PROBE(lpc546xx_probe);
 
+			if(ap->ap_designer == AP_DESIGNER_ARM)
+			{
+				//gdb_outf("Attempting Nuvoton M032 probe ...\n");
+				PROBE(nu_m032_probe);
+			}
+
 			PROBE(lpc43xx_probe);
 			PROBE(kinetis_probe); /* Older K-series */
 		} else if (ap->ap_partno == 0x4cb) { /* Cortex-M23 ROM */

@@ -197,4 +197,5 @@ bool efm32_probe(target *t);
 bool msp432_probe(target *t);
 bool ke04_probe(target *t);
 bool rp_probe(target *t);
+bool nu_m032_probe(target *t);
 #endif
