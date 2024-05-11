@@ -447,6 +447,13 @@ bool cortexm_probe(ADIv5_AP_t *ap)
 		} else if (ap->ap_partno == 0x471)  { /* Cortex-M0 ROM */
 			PROBE(lpc11xx_probe); /* LPC24C11 */
 			PROBE(lpc43xx_probe);
+			
+			if(ap->ap_designer == AP_DESIGNER_ARM)
+			{
+				//gdb_outf("Attempting Nuvoton M032 probe ...\n");
+				PROBE(nu_m032_probe);
+			}
+						
 		} else if (ap->ap_partno == 0x4c4) { /* Cortex-M4 ROM */
 			/* The LPC546xx and LPC43xx parts present with the same AP ROM Part
 			Number, so we need to probe both. Unfortunately, when probing for
@@ -456,12 +463,6 @@ bool cortexm_probe(ADIv5_AP_t *ap)
 			probe for the LPC546xx first, which experimentally doesn't harm
 			LPC43xx detection. */
 			PROBE(lpc546xx_probe);
-
-			if(ap->ap_designer == AP_DESIGNER_ARM)
-			{
-				//gdb_outf("Attempting Nuvoton M032 probe ...\n");
-				PROBE(nu_m032_probe);
-			}
 
 			PROBE(lpc43xx_probe);
 			PROBE(kinetis_probe); /* Older K-series */
